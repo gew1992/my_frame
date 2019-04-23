@@ -17,7 +17,7 @@ class IndexController extends Controller
         print_r($lists);
     }
 
-    public function getInfo($param = [])
+    public function getInfo()
     {
         $IndexModel = new IndexModel();
 
