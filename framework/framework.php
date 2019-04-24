@@ -17,6 +17,8 @@ defined('ROUTE_PATH') or define('ROUTE_PATH', dirname($_SERVER['SCRIPT_FILENAME'
 require APP_PATH . 'conf/config.php';
 require FRAME_PATH . 'Core.php';
 require ROUTE_PATH . 'route.php';
+require APP_PATH . 'framework/Request.php';
+require APP_PATH . 'framework/helper.php';
 
 // 实例化核心类
 $fast = new Core($route);

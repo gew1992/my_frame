@@ -35,7 +35,7 @@ class Core
         $path = $_SERVER['REQUEST_URI'];
         $path = ltrim($path,'/');
         if (empty($path)) {
-            call_user_func(array($this->_controllerName, $this->_actionName));
+            call_user_func([$this->_controllerName, $this->_actionName]);
             return;
         }
 

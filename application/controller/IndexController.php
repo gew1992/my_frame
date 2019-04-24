@@ -19,6 +19,8 @@ class IndexController extends Controller
 
     public function getInfo()
     {
+        $key1 = input('post.');
+
         $IndexModel = new IndexModel();
 
         $info = $IndexModel->selectById(1);
