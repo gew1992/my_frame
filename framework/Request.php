@@ -17,6 +17,10 @@ class Request
      * @var array post请求参数
      */
     protected $post = [];
+    /**
+     * @var array get请求参数
+     */
+    protected $get = [];
 
     public static function instance()
     {
@@ -28,7 +32,15 @@ class Request
 
     public function get($key = '')
     {
+        $this->get = $_GET;
 
+        if ($key == '') {
+            //返回全部get参数值
+            return $this->get;
+        }
+
+        //返回指定的参数值
+        return isset($this->get[$key]) ? $this->get[$key] : '';
     }
 
     public function post($key = '')

@@ -39,7 +39,7 @@ if (!function_exists('input')) {
                 return request()->$method($key);
             }
         } else {
-            echo '请求方式错误';
+            echo '获取参数错误';
             exit;
         }
     }

@@ -19,11 +19,11 @@ class IndexController extends Controller
 
     public function getInfo()
     {
-        $key1 = input('post.');
+        $id = !empty(input('get.id')) ? input('get.id') : 2;
 
         $IndexModel = new IndexModel();
 
-        $info = $IndexModel->selectById(1);
+        $info = $IndexModel->selectById($id);
 
         print_r($info);
     }

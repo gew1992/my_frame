@@ -11,5 +11,5 @@
  */
 $route = [
     'index' => 'IndexController@index',
-    'getInfo' => 'IndexController@getInfo',
+    'getInfo/:id' => 'IndexController@getInfo',
 ];

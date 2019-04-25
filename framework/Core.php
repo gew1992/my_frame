@@ -45,10 +45,29 @@ class Core
         array_shift($path_arr);
 
         $route = $this->_route;
+        foreach ($route as $item => $value) {
+            if (strpos($item, '/') !== false) {
+                $param_str = substr($item, strpos($item, '/'));
+                $new_item = str_replace($param_str, '', $item);
+
+                $route[$new_item]['route'] = $value;
+                $route[$new_item]['param_str'] = $param_str;
+
+                unset($route[$item]);
+            }
+        }
+
         if (isset($route[$key])) {
-            $params = explode('@', $route[$key]);
-            $queryString = empty($path_arr) ? [] : $path_arr;
-            call_user_func_array([$params[0], $params[1]], $queryString);
+            $params = explode('@', is_array($route[$key]) ? $route[$key]['route'] : $route[$key]);
+            if (!empty($path_arr) && $_SERVER['REQUEST_METHOD'] == 'GET') {
+                $fields = array_values(array_filter(explode('/', $route[$key]['param_str'])));
+                foreach ($fields as $k => $field) {
+                    $_GET[ltrim($field, ':')] = $path_arr[$k];
+                }
+            }
+//            $queryString = empty($path_arr) ? [] : $path_arr;
+//            call_user_func_array([$params[0], $params[1]], $queryString);
+            call_user_func([$params[0], $params[1]]);
         } else {
             echo '路由不存在!';
         }
