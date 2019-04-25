@@ -20,7 +20,7 @@ class Core
         $this->_route = $route;
     }
 
-    // 运行程序
+    // 运行
     function run()
     {
         spl_autoload_register(array($this, 'loadClass'));

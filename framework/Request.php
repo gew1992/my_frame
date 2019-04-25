@@ -58,6 +58,19 @@ class Request
 
     public function param($key = '')
     {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
+        switch ($method)
+        {
+            case 'GET':
+                return $this->get($key);
+                break;
+            case 'POST':
+                return $this->post($key);
+                break;
+            default:
+                return $this->get($key);
+                break;
+        }
     }
 }

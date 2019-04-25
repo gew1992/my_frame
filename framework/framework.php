@@ -7,18 +7,19 @@
  */
 
 // 定义常量
-defined('FRAME_PATH') or define('FRAME_PATH', __DIR__.'/');
-defined('APP_PATH') or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
+define('FD_DS', DIRECTORY_SEPARATOR);
+defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . FD_DS);
+defined('APP_PATH') or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']) . FD_DS);
 defined('APP_DEBUG') or define('APP_DEBUG', false);
-defined('CONFIG_PATH') or define('CONFIG_PATH', APP_PATH.'conf/');
-defined('ROUTE_PATH') or define('ROUTE_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/routes/');
+defined('CONFIG_PATH') or define('CONFIG_PATH', APP_PATH.'conf' . FD_DS);
+defined('ROUTE_PATH') or define('ROUTE_PATH', dirname($_SERVER['SCRIPT_FILENAME']). FD_DS . 'routes' . FD_DS);
 
 // 包含所需文件
-require APP_PATH . 'conf/config.php';
+require APP_PATH . 'conf' . FD_DS .'config.php';
 require FRAME_PATH . 'Core.php';
 require ROUTE_PATH . 'route.php';
-require APP_PATH . 'framework/Request.php';
-require APP_PATH . 'framework/helper.php';
+require APP_PATH . 'framework' . FD_DS . 'Request.php';
+require APP_PATH . 'framework' . FD_DS . 'helper.php';
 
 // 实例化核心类
 $fast = new Core($route);

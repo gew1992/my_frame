@@ -11,3 +11,4 @@ define('DB_NAME', '数据库名称');
 define('DB_USER', '用户名');
 define('DB_PASSWORD', '密码');
 define('DB_HOST', '数据库地址');
+define('DB_PORT', 3306);
