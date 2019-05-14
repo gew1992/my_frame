@@ -35,8 +35,10 @@ class webSocketServer
     {
         echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
         foreach ($this->_fds as $_fd) {
-            //将消息发送给所有用户
-            $server->push($_fd, json_encode(['fd' => $frame->fd, 'msg' => $frame->data]));
+            if ($this->_server->isEstablished($_fd)) {
+                //将消息发送给所有用户
+                $server->push($_fd, json_encode(['fd' => $frame->fd, 'msg' => $frame->data]));
+            }
         }
     }
 
