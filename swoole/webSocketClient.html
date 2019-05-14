@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>聊天室</title>
+
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<textarea class="log" style="width: 100%; height: 500px;">
+
+=======聊天室======
+
+</textarea>
+
+<input type="button" value="连接" onClick="link()">
+
+<input type="button" value="断开" onClick="breakOff()">
+
+<input type="text" id="text">
+
+<input type="button" value="发送" onClick="send()">
+
+<script>
+
+    function link(){
+
+        var url = 'ws://127.0.0.1:9501';
+
+        socket = new WebSocket(url);
+
+        socket.onopen = function(){
+            log1('连接成功')
+        }
+
+        socket.onmessage = function(event){
+            log(event.data)
+        }
+
+        socket.onclose = function(){
+            log1('断开连接')
+        }
+
+    }
+
+    function breakOff(){
+        socket.close();
+
+        socket=null;
+
+    }
+
+    function log1(data) {
+        $('.log').append(data+'\r\n');
+    }
+
+    function log(data){
+        var msg = $.parseJSON(data)
+        $('.log').append('用户'+msg['fd']+'：'+msg['msg']+'\r\n');
+    }
+
+    function send(){
+        var text = $('#text').val();
+
+        socket.send(text);
+    }
+
+</script>
+
+</body>
+
+</html>
